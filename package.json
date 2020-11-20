@@ -1,0 +1,26 @@
+{
+  "name": "social-network-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MahmoudAbdulrhman/social-network-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MahmoudAbdulrhman/social-network-api/issues"
+  },
+  "homepage": "https://github.com/MahmoudAbdulrhman/social-network-api#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mogodb": "0.0.1-security",
+    "mongodb": "^3.6.3",
+    "mongoose": "^5.10.15"
+  }
+}
