@@ -25,6 +25,29 @@ const thoughtSchema = new Schema (
     },  
 );
 
+const reactionSchema = new schema (
+    {
+        reactionId:{
+
+        },
+
+        reactionBody:{
+            type: String,
+            required: true,
+
+        },
+        username:{
+            type: String,
+            required: true
+        },
+        createAt: {
+            type: Date,
+            default: Date.now,
+            get: (createdAtVal) => dateFormat(createdAtVal)
+        },
+    }
+);
+
 
 // Create the Thought model using the thoughtSchema
 const Thought = model('Thought',thoughtSchema);
