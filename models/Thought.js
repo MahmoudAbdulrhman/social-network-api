@@ -21,6 +21,11 @@ const thoughtSchema = new Schema (
             required: true
         },
 
+        toJSON: {
+            virtuals: true,
+            getters: true
+        },
+
        reactions: [reactionSchema], 
     },  
 );
@@ -28,13 +33,14 @@ const thoughtSchema = new Schema (
 const reactionSchema = new schema (
     {
         reactionId:{
-
+            type:Schema.Types.ObjectId,
+            default: () => new Types.ObjectId()
         },
 
         reactionBody:{
             type: String,
             required: true,
-
+            maxlength:280
         },
         username:{
             type: String,
@@ -48,9 +54,11 @@ const reactionSchema = new schema (
     }
 );
 
+thoughtSchema.virtual("reactionCount").get(()=> this.reactions.length)
+
 
 // Create the Thought model using the thoughtSchema
 const Thought = model('Thought',thoughtSchema);
-
+n
 // export the thought model
 module.exports = Thought;
