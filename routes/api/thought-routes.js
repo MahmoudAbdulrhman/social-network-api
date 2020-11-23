@@ -13,7 +13,8 @@ const {
 // /api/thoughts
 router
 .route('/')
-.get(getThoughts);
+.get(getThoughts)
+.post(addThought);
 
 // /api/thoughts/:id
 router
@@ -25,7 +26,7 @@ router
 router
 .route('/:userId')
 .get(getThoughts)
-.post(addThought);
+
 
 // /api/Thoughts/<userId>/<ThoughtId>
 router
