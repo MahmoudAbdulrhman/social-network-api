@@ -1,36 +1,7 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model,Types } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
-const thoughtSchema = new Schema (
-    {
-    
-        thoughtText:{
-            type: String,
-            required: true,
-            validate: [({ length }) => length >= 1 , 'Password should be longer.']
-        },
-
-        createAt: {
-            type: Date,
-            default: Date.now,
-            get: (createdAtVal) => dateFormat(createdAtVal)
-        },
-
-        username: {
-            type: String,
-            required: true
-        },
-
-        toJSON: {
-            virtuals: true,
-            getters: true
-        },
-
-       reactions: [reactionSchema], 
-    },  
-);
-
-const reactionSchema = new schema (
+const reactionSchema = new Schema (
     {
         reactionId:{
             type:Schema.Types.ObjectId,
@@ -50,15 +21,55 @@ const reactionSchema = new schema (
             type: Date,
             default: Date.now,
             get: (createdAtVal) => dateFormat(createdAtVal)
+        }
+    },
+    {
+        toJSON: {
+          getters: true
+        }
+      }
+);
+const thoughtSchema = new Schema (
+    {
+    
+        thoughtText:{
+            type: String,
+            required: true
+            
         },
+
+        createAt: {
+            type: Date,
+            default: Date.now,
+            get: (createdAtVal) => dateFormat(createdAtVal)
+        },
+
+        username: {
+            type: String,
+            required: true
+        },
+
+       reactions: [reactionSchema], 
+    }, 
+    {
+    toJSON: {
+        virtuals: true,
+        getters: true
+     }
     }
 );
 
-thoughtSchema.virtual("reactionCount").get(()=> this.reactions.length)
+
+
+// thoughtSchema.virtual("reactionCount").get(()=> this.reactions.length)
+
+thoughtSchema.virtual('reactionCount').get(function() {
+    return this.reactions.length});
 
 
 // Create the Thought model using the thoughtSchema
 const Thought = model('Thought',thoughtSchema);
-n
+
+
 // export the thought model
 module.exports = Thought;
